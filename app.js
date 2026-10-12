@@ -57,7 +57,7 @@ const RESTAURANTS = [
     desc: "大学朴素食堂风，常遇外国同学。手抓饭很香。",
     tone: "amber",
     stars: 4,
-    meals: ["lunch", "dinner", "tea"],
+    meals: ["lunch", "dinner"],
     badges: ["好吃"],
     tags: ["手抓饭", "国际范"],
   },
@@ -68,7 +68,7 @@ const RESTAURANTS = [
     desc: "西北菜，酸辣口，相当于校外点菜饭店的体验。",
     tone: "rust",
     stars: 3,
-    meals: ["lunch", "dinner", "tea"],
+    meals: ["lunch", "dinner"],
     badges: ["好吃"],
     tags: ["西北菜", "酸辣"],
   },
@@ -79,7 +79,7 @@ const RESTAURANTS = [
     desc: "浙江菜主场：鱼鲜、优雅烤鸭。",
     tone: "navy",
     stars: 0,
-    meals: ["lunch", "dinner", "tea"],
+    meals: ["lunch", "dinner"],
     badges: ["好吃"],
     tags: ["浙菜", "烤鸭"],
   },
@@ -90,17 +90,11 @@ const RESTAURANTS = [
     desc: "有浙大校徽甜点的咖啡厅，适合坐坐聊聊天，甜点也能出片。",
     tone: "blue",
     stars: 0,
-    // 三餐同一套主菜单；麦斯威也进三餐，保证午饭/下午茶/晚饭列表一致（仅银泉不进下午茶）
-    meals: ["lunch", "dinner", "tea"],
+    meals: ["tea"],
     badges: ["好吃", "拍照"],
     tags: ["咖啡", "校徽甜点"],
   },
 ];
-
-/** 三餐可见店名（调试/自检用） */
-function mealMenu(meal) {
-  return RESTAURANTS.filter((r) => r.meals.includes(meal)).map((r) => r.name);
-}
 
 const PLAY_PLACES = [
   {
@@ -265,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("leaveTime").addEventListener("change", persistState);
 });
 
-const STORAGE_KEY = "zju-invite-draft-v3";
+const STORAGE_KEY = "zju-invite-draft-v4";
 
 function persistState() {
   const payload = {
