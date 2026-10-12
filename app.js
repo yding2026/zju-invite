@@ -43,7 +43,7 @@ const RESTAURANTS = [
     id: "yinquan",
     name: "银泉二楼速选区",
     short: "银泉",
-    desc: "甜品大宝库，还有美味烤鸭卷——午饭晚饭加餐都友好。",
+    desc: "甜品大宝库，还有美味烤鸭卷——午饭、晚饭加餐都友好（下午茶不安排这家）。",
     tone: "blush",
     stars: 5,
     meals: ["lunch", "dinner"],
@@ -90,11 +90,17 @@ const RESTAURANTS = [
     desc: "有浙大校徽甜点的咖啡厅，适合坐坐聊聊天，甜点也能出片。",
     tone: "blue",
     stars: 0,
+    // 三餐同一套主菜单；麦斯威也进三餐，保证午饭/下午茶/晚饭列表一致（仅银泉不进下午茶）
     meals: ["lunch", "dinner", "tea"],
     badges: ["好吃", "拍照"],
     tags: ["咖啡", "校徽甜点"],
   },
 ];
+
+/** 三餐可见店名（调试/自检用） */
+function mealMenu(meal) {
+  return RESTAURANTS.filter((r) => r.meals.includes(meal)).map((r) => r.name);
+}
 
 const PLAY_PLACES = [
   {
