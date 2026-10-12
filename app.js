@@ -194,7 +194,26 @@ const PLAY_PLACES = [
 
 function praise(name) {
   const line = PRAISE[Math.floor(Math.random() * PRAISE.length)];
-  showToast(`${line}「${name}」入选～`);
+  showCelebrateModal({
+    emoji: "✨👏",
+    title: line,
+    body: `「${name}」入选日程！俞女士这一选，品味直接拉满～`,
+  });
+}
+
+/** 与满 3 地点彩蛋同一套弹窗 + 撒花 */
+function showCelebrateModal({ emoji, title, body }) {
+  burstConfetti();
+  const modal = document.getElementById("eggModal");
+  document.getElementById("eggEmoji").textContent = emoji;
+  document.getElementById("eggTitle").textContent = title;
+  document.getElementById("eggBody").textContent = body;
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  document.getElementById("eggClose").onclick = () => {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+  };
 }
 
 function badgeHtml(badges = []) {
@@ -529,8 +548,8 @@ function addPlay(id) {
   refreshSchedule();
   persistState();
   const p = PLAY_PLACES.find((x) => x.id === id);
-  praise(p.name);
-  maybeEgg();
+  // 满 3 个用专属彩蛋，否则用同款「夸眼光」弹窗
+  if (!maybeEgg()) praise(p.name);
 }
 
 function removePlay(id) {
@@ -540,16 +559,15 @@ function removePlay(id) {
 }
 
 function maybeEgg() {
-  if (state.eggShown || state.playIds.length < 3) return;
+  if (state.eggShown || state.playIds.length < 3) return false;
   state.eggShown = true;
-  burstConfetti();
-  const modal = document.getElementById("eggModal");
-  modal.classList.remove("hidden");
-  modal.setAttribute("aria-hidden", "false");
-  document.getElementById("eggClose").onclick = () => {
-    modal.classList.add("hidden");
-    modal.setAttribute("aria-hidden", "true");
-  };
+  persistState();
+  showCelebrateModal({
+    emoji: "🍂🎉",
+    title: "日程渐渐丰满啦！",
+    body: "已经选了 3 个玩乐地点，俞女士眼光真好～继续加点吃喝，这一天会更圆满。",
+  });
+  return true;
 }
 
 function burstConfetti() {
