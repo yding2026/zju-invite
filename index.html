@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>浙大一日游 · 专属邀请函</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+</head>
+<body>
+  <!-- 飘落枫叶装饰 -->
+  <div class="leaves" aria-hidden="true"></div>
+
+  <!-- Hero：品牌优先的邀请开场 -->
+  <header class="hero">
+    <div class="hero__glow"></div>
+    <div class="hero__seal" aria-hidden="true">求是</div>
+    <p class="hero__eyebrow">紫金港校区 · 秋日特邀</p>
+    <h1 class="hero__brand">
+      <span class="hero__brand-main">浙大一日游</span>
+      <span class="hero__brand-sub">专属邀请函</span>
+    </h1>
+    <p class="hero__to">
+      致亲爱的
+      <span class="name-glow" id="auntName">俞女士</span>
+      、
+      <span class="name-glow delay">徐先生</span>
+      与小宝
+      <span class="name-glow delay2">徐同学</span>
+    </p>
+    <p class="hero__lead">诚邀你们来浙大走走看看、吃吃喝喝——下面的日程，全部由你们自己点单。</p>
+    <div class="hero__cta-row">
+      <a class="btn btn--primary" href="#guide">先看使用说明</a>
+      <a class="btn btn--ghost" href="#dates">直接开始点单</a>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">向下滑 · 亲手安排这一天</div>
+  </header>
+
+  <main>
+    <!-- 使用说明：开场必看 -->
+    <section class="section section--guide" id="guide">
+      <div class="section__head">
+        <h2>使用说明 · 三分钟点好一天</h2>
+        <p>这不是说明书，是一份好玩的点单手册。标签认准：<span class="pill pill--food">好吃</span> <span class="pill pill--photo">拍照</span></p>
+      </div>
+      <ol class="guide-steps">
+        <li><strong>选日期</strong>：点一个侄女有空的日子；想约别的就选「其他日期」。</li>
+        <li><strong>点吃喝</strong>：午饭 / 下午茶 / 晚饭可开关，每顿选一家。带星的是侄女私心推荐。</li>
+        <li><strong>点玩乐</strong>：把想去的地方拖进右侧日程表（手机点「加入」也行）。</li>
+        <li><strong>写备注</strong>：还想去哪儿，随手写。</li>
+        <li><strong>生成日程</strong>：保存图片或复制文字，发还给侄女确认。</li>
+      </ol>
+      <figure class="map-card">
+        <img src="assets/map-zijingang.jpg" alt="浙江大学紫金港校区手绘地图" loading="lazy" />
+        <figcaption>紫金港手绘地图 · 逛之前先认认路（可放大查看）</figcaption>
+      </figure>
+    </section>
+
+    <!-- 日期选择：由姑姑自定 -->
+    <section class="section" id="dates">
+      <div class="section__head">
+        <h2>选个好日子</h2>
+        <p>侄女目前有空的日子标在下面；想挑别的日子也可以选「其他日期」，再问侄女确认。11 月暂未排定（有考试）。</p>
+      </div>
+      <div class="date-grid" id="dateGrid" role="listbox" aria-label="可选日期"></div>
+      <div class="time-row">
+        <label class="field">
+          <span>大概几点到校？</span>
+          <select id="arriveTime">
+            <option value="">先不定，到时再说</option>
+            <option value="9:00">上午 9:00</option>
+            <option value="9:30">上午 9:30</option>
+            <option value="10:00">上午 10:00</option>
+            <option value="10:30">上午 10:30</option>
+            <option value="11:00">上午 11:00</option>
+            <option value="13:00">下午 13:00</option>
+            <option value="14:00">下午 14:00</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>大概几点结束？</span>
+          <select id="leaveTime">
+            <option value="">先不定，玩够再说</option>
+            <option value="15:00">下午 15:00</option>
+            <option value="16:00">下午 16:00</option>
+            <option value="17:00">下午 17:00</option>
+            <option value="18:00">傍晚 18:00</option>
+            <option value="19:00">晚上 19:00</option>
+            <option value="20:00">晚上 20:00</option>
+          </select>
+        </label>
+      </div>
+      <p class="hint" id="dateHint">想约 11 月其他日子也可以先选「其他日期」，发还日程时侄女再跟你确认。</p>
+    </section>
+
+    <!-- 吃喝选择 -->
+    <section class="section" id="food">
+      <div class="section__head">
+        <h2>吃喝点单</h2>
+        <p>午饭与晚饭可选餐厅相同；下午茶另有一批。认准 <span class="pill pill--food">好吃</span> 标签与星级～</p>
+      </div>
+
+      <div class="meal-block" data-meal="lunch">
+        <div class="meal-block__top">
+          <h3>午饭</h3>
+          <label class="switch">
+            <input type="checkbox" id="wantLunch" checked />
+            <span>要吃午饭</span>
+          </label>
+        </div>
+        <div class="food-grid" id="lunchGrid"></div>
+      </div>
+
+      <div class="meal-block" data-meal="tea">
+        <div class="meal-block__top">
+          <h3>下午茶</h3>
+          <label class="switch">
+            <input type="checkbox" id="wantTea" checked />
+            <span>要吃下午茶</span>
+          </label>
+        </div>
+        <div class="food-grid" id="teaGrid"></div>
+      </div>
+
+      <div class="meal-block" data-meal="dinner">
+        <div class="meal-block__top">
+          <h3>晚饭</h3>
+          <label class="switch">
+            <input type="checkbox" id="wantDinner" />
+            <span>要吃晚饭</span>
+          </label>
+        </div>
+        <div class="food-grid" id="dinnerGrid"></div>
+      </div>
+    </section>
+
+    <!-- 玩乐：拖进日程表 -->
+    <section class="section" id="play">
+      <div class="section__head">
+        <h2>玩乐点单</h2>
+        <p>把想去的地方<strong>拖进</strong>右侧日程表（手机可点「加入」）。认准 <span class="pill pill--photo">拍照</span> 标签，出片点都标好了。</p>
+      </div>
+      <div class="play-layout">
+        <div class="play-pool" id="playPool" aria-label="可选玩乐地点"></div>
+        <div class="schedule-panel" id="schedule">
+          <div class="schedule-panel__head">
+            <h3>游玩日程表</h3>
+            <span class="badge" id="playCount">0 个地点</span>
+          </div>
+          <div class="dropzone" id="dropzone" data-empty="把玩乐方块拖到这里，或点「加入」">
+            <!-- 吃喝会自动插入；玩乐可拖入排序 -->
+          </div>
+          <p class="dropzone-tip">提示：日程里可上下拖动玩乐项，调整先后顺序。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 备注 -->
+    <section class="section" id="notes">
+      <div class="section__head">
+        <h2>还想去哪儿？</h2>
+        <p>校史馆、某栋楼、某家店……随便写，侄女来安排。</p>
+      </div>
+      <textarea id="extraNotes" rows="4" placeholder="例如：想看看东区操场 / 想喝杯奶茶 / 想买一件浙大卫衣……"></textarea>
+    </section>
+
+    <!-- 生成 -->
+    <section class="section section--finale" id="finale">
+      <div class="section__head">
+        <h2>生成专属日程</h2>
+        <p>点下面按钮，把这一天定下来，再发还侄女确认～</p>
+      </div>
+      <div class="finale-actions">
+        <button type="button" class="btn btn--primary btn--lg" id="btnGenerate">生成最后日程表</button>
+      </div>
+
+      <div class="result hidden" id="result">
+        <div class="postcard" id="postcard">
+          <div class="postcard__seal">浙大秋游</div>
+          <h3 class="postcard__title">俞女士一家 · 浙大一日游</h3>
+          <p class="postcard__meta" id="resultMeta"></p>
+          <ol class="postcard__list" id="resultList"></ol>
+          <p class="postcard__notes" id="resultNotes"></p>
+          <p class="postcard__foot">请把这份日程发还给侄女 · 不见不散</p>
+        </div>
+        <div class="export-row">
+          <button type="button" class="btn btn--primary" id="btnSaveImg">保存为图片</button>
+          <button type="button" class="btn btn--ghost" id="btnCopyMd">复制 Markdown</button>
+          <button type="button" class="btn btn--ghost" id="btnDownloadMd">下载 .md</button>
+        </div>
+        <p class="hint center">发给侄女后，她好提前订座、约见面地点～</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>紫金港见 · 侄女已候驾</p>
+  </footer>
+
+  <!-- 彩蛋弹窗 -->
+  <div class="toast hidden" id="toast" role="status"></div>
+  <div class="modal hidden" id="eggModal" aria-hidden="true">
+    <div class="modal__card">
+      <div class="modal__emoji">🍂🎉</div>
+      <h3>日程渐渐丰满啦！</h3>
+      <p>已经选了 3 个玩乐地点，俞女士眼光真好～继续加点吃喝，这一天会更圆满。</p>
+      <button type="button" class="btn btn--primary" id="eggClose">继续点单</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
