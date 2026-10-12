@@ -100,40 +100,58 @@
     <section class="section" id="food">
       <div class="section__head">
         <h2>吃喝点单</h2>
-        <p>午饭与晚饭可选餐厅相同；下午茶另有一批。认准 <span class="pill pill--food">好吃</span> 标签与星级～</p>
+        <p><strong>第一步</strong>先打开「要不要吃」；<strong>第二步</strong>再选哪一家。三餐餐厅清单一致（下午茶不含银泉）。认准 <span class="pill pill--food">好吃</span>～</p>
       </div>
 
-      <div class="meal-block" data-meal="lunch">
+      <div class="meal-block is-off" data-meal="lunch">
         <div class="meal-block__top">
-          <h3>午饭</h3>
-          <label class="switch">
-            <input type="checkbox" id="wantLunch" checked />
+          <div>
+            <p class="meal-step">第一步 · 先决定</p>
+            <h3>午饭</h3>
+          </div>
+          <label class="switch switch--emph">
+            <input type="checkbox" id="wantLunch" />
             <span>要吃午饭</span>
           </label>
         </div>
-        <div class="food-grid" id="lunchGrid"></div>
+        <div class="food-wrap">
+          <p class="meal-gate">先打开上方开关，再选吃哪家</p>
+          <div class="food-grid" id="lunchGrid"></div>
+        </div>
       </div>
 
-      <div class="meal-block" data-meal="tea">
+      <div class="meal-block is-off" data-meal="tea">
         <div class="meal-block__top">
-          <h3>下午茶</h3>
-          <label class="switch">
-            <input type="checkbox" id="wantTea" checked />
+          <div>
+            <p class="meal-step">第一步 · 先决定</p>
+            <h3>下午茶</h3>
+          </div>
+          <label class="switch switch--emph">
+            <input type="checkbox" id="wantTea" />
             <span>要吃下午茶</span>
           </label>
         </div>
-        <div class="food-grid" id="teaGrid"></div>
+        <div class="food-wrap">
+          <p class="meal-gate">先打开上方开关，再选吃哪家</p>
+          <div class="food-grid" id="teaGrid"></div>
+        </div>
       </div>
 
-      <div class="meal-block" data-meal="dinner">
+      <div class="meal-block is-off" data-meal="dinner">
         <div class="meal-block__top">
-          <h3>晚饭</h3>
-          <label class="switch">
+          <div>
+            <p class="meal-step">第一步 · 先决定</p>
+            <h3>晚饭</h3>
+          </div>
+          <label class="switch switch--emph">
             <input type="checkbox" id="wantDinner" />
             <span>要吃晚饭</span>
           </label>
         </div>
-        <div class="food-grid" id="dinnerGrid"></div>
+        <div class="food-wrap">
+          <p class="meal-gate">先打开上方开关，再选吃哪家</p>
+          <div class="food-grid" id="dinnerGrid"></div>
+        </div>
       </div>
     </section>
 

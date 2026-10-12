@@ -520,15 +520,45 @@ textarea {
   background: rgba(255, 255, 255, 0.55);
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid var(--line);
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
 }
 
-.meal-block.is-off {
-  opacity: 0.55;
+.meal-block:not(.is-off) {
+  border-color: rgba(0, 63, 136, 0.28);
+  box-shadow: 0 0 0 3px rgba(0, 63, 136, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.meal-block.is-off .meal-block__top {
+  position: relative;
+  z-index: 2;
+}
+
+.meal-block.is-off .food-wrap {
+  position: relative;
+  pointer-events: none;
+  user-select: none;
 }
 
 .meal-block.is-off .food-grid {
+  filter: blur(3px) grayscale(0.55);
+  opacity: 0.45;
+  transform: scale(0.985);
+}
+
+.meal-block.is-off .meal-gate {
+  opacity: 1;
+}
+
+.meal-block:not(.is-off) .meal-gate {
+  opacity: 0;
   pointer-events: none;
-  filter: grayscale(0.4);
+}
+
+.meal-block:not(.is-off) .meal-step::after {
+  content: " · 第二步选餐厅";
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .meal-block__top {
@@ -539,11 +569,43 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.meal-step {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .meal-block__top h3 {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.45rem;
   color: var(--lake);
+}
+
+.food-wrap {
+  position: relative;
+}
+
+.meal-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--zju-blue);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 250, 248, 0.2),
+    rgba(247, 250, 248, 0.55)
+  );
+  transition: opacity 0.25s;
 }
 
 .switch {
@@ -553,6 +615,31 @@ textarea {
   font-size: 0.9rem;
   cursor: pointer;
   user-select: none;
+}
+
+.switch--emph {
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #003f88, #2f6fad);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 63, 136, 0.25);
+}
+
+.switch--emph input {
+  accent-color: #fff;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.meal-block:not(.is-off) .switch--emph {
+  background: var(--mist);
+  color: var(--zju-blue);
+  box-shadow: none;
+}
+
+.meal-block:not(.is-off) .switch--emph input {
+  accent-color: var(--zju-blue);
 }
 
 .switch input {

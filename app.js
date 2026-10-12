@@ -26,7 +26,7 @@ const PRAISE = [
   "不愧是俞女士，点到心巴上",
 ];
 
-// 午饭 / 晚饭选项相同；下午茶另套
+// 午饭 / 晚饭完全相同；下午茶不含银泉
 const RESTAURANTS = [
   {
     id: "qiushi",
@@ -40,13 +40,24 @@ const RESTAURANTS = [
     tags: ["庭院", "休闲"],
   },
   {
+    id: "yinquan",
+    name: "银泉二楼速选区",
+    short: "银泉",
+    desc: "甜品大宝库，还有美味烤鸭卷——午饭晚饭加餐都友好。",
+    tone: "blush",
+    stars: 5,
+    meals: ["lunch", "dinner"],
+    badges: ["好吃"],
+    tags: ["甜品", "烤鸭卷"],
+  },
+  {
     id: "minzu",
     name: "民族餐厅",
     short: "民族",
     desc: "大学朴素食堂风，常遇外国同学。手抓饭很香。",
     tone: "amber",
     stars: 4,
-    meals: ["lunch", "dinner"],
+    meals: ["lunch", "dinner", "tea"],
     badges: ["好吃"],
     tags: ["手抓饭", "国际范"],
   },
@@ -57,7 +68,7 @@ const RESTAURANTS = [
     desc: "西北菜，酸辣口，相当于校外点菜饭店的体验。",
     tone: "rust",
     stars: 3,
-    meals: ["lunch", "dinner"],
+    meals: ["lunch", "dinner", "tea"],
     badges: ["好吃"],
     tags: ["西北菜", "酸辣"],
   },
@@ -68,20 +79,9 @@ const RESTAURANTS = [
     desc: "浙江菜主场：鱼鲜、优雅烤鸭。",
     tone: "navy",
     stars: 0,
-    meals: ["lunch", "dinner"],
-    badges: ["好吃"],
-    tags: ["浙菜", "烤鸭"],
-  },
-  {
-    id: "yinquan",
-    name: "银泉二楼速选区",
-    short: "银泉",
-    desc: "甜品大宝库，还有美味烤鸭卷——下午茶与加餐都友好。",
-    tone: "blush",
-    stars: 5,
     meals: ["lunch", "dinner", "tea"],
     badges: ["好吃"],
-    tags: ["甜品", "烤鸭卷"],
+    tags: ["浙菜", "烤鸭"],
   },
   {
     id: "maxway",
@@ -90,7 +90,7 @@ const RESTAURANTS = [
     desc: "有浙大校徽甜点的咖啡厅，适合坐坐聊聊天，甜点也能出片。",
     tone: "blue",
     stars: 0,
-    meals: ["tea"],
+    meals: ["lunch", "dinner", "tea"],
     badges: ["好吃", "拍照"],
     tags: ["咖啡", "校徽甜点"],
   },
@@ -215,8 +215,9 @@ const MEAL_LABEL = {
 const state = {
   dateId: null,
   meals: {
-    lunch: { want: true, placeId: null },
-    tea: { want: true, placeId: null },
+    // 默认先不选「要不要吃」，引导先开开关再点餐厅
+    lunch: { want: false, placeId: null },
+    tea: { want: false, placeId: null },
     dinner: { want: false, placeId: null },
   },
   playIds: [],
@@ -239,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("leaveTime").addEventListener("change", persistState);
 });
 
-const STORAGE_KEY = "zju-invite-draft-v2";
+const STORAGE_KEY = "zju-invite-draft-v3";
 
 function persistState() {
   const payload = {
